@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: SecurityTest
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sg_security?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 47.122.122.81
+      port: 6381
+      password: aa123456
+      database: 10
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.moyan.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+logging:
+  #日志配置
+  level:
+    com:
+      iot:
+        mapper: debug
+        service: info
+        controller: info
