@@ -1,5 +1,6 @@
 package com.moyan.service.impl;
 
+import com.moyan.constant.TokenConstant;
 import com.moyan.pojo.LoginUser;
 import com.moyan.pojo.dto.LoginUserDTO;
 import com.moyan.service.LoginServcie;
@@ -45,12 +46,13 @@ public class LoginServiceImpl implements LoginServcie {
         //4.认证通过生成token
         String jwt = JwtUtil.createJWT(userId);
         //5.用户信息存入redis
-        redisCache.setCacheObject("login:" + userId, loginUser);
+        redisCache.setCacheObject(TokenConstant.TOKEN_INFO + userId, loginUser);
         //6.把token返回给前端
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("Authorization", jwt);
+        hashMap.put(TokenConstant.TOKEN_HEADER, jwt);
         return hashMap;
     }
+
     @Override
     public void logout() {
         //获取SecurityContextHolder中的用户id
@@ -58,6 +60,6 @@ public class LoginServiceImpl implements LoginServcie {
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         Long userId = loginUser.getUser().getId();
         //删除redis中的用户信息
-        redisCache.deleteObject("login:" + userId);
+        redisCache.deleteObject(TokenConstant.TOKEN_INFO + userId);
     }
 }

@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 捕获sql异常
+     * 捕获sql异常,如(唯一索引异常捕获)
      * @param ex
      * @return
      */

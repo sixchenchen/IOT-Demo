@@ -69,6 +69,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 配置授权规则
                         .requestMatchers("/login").permitAll()// 登录允许匿名访问
+                        .requestMatchers("/user/save").permitAll()// 登录允许匿名访问
                         .requestMatchers(
                                 "/doc.html",                    // Knife4j 主页面
                                 "/webjars/**",                  // webjars 静态资源

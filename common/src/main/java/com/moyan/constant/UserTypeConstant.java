@@ -1,13 +1,10 @@
 package com.moyan.constant;
 
 /**
- * 状态常量，启用或者禁用
+ * 用户类型：0代表普通用户，1代表管理员
  */
 public class UserTypeConstant {
+    public static final String DEFAULT_USER = "0";
 
-    //启用
-    public static final String USER = "0";
-
-
-
+    public static final String ADMIN_USER = "1";
 }

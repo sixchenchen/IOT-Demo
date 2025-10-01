@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moyan.constant.PasswordConstant;
 import com.moyan.constant.StatusConstant;
 import com.moyan.constant.UserTypeConstant;
+import com.moyan.context.BaseContext;
 import com.moyan.dto.UserDTO;
 import com.moyan.mapper.SysUserMapper;
 import com.moyan.pojo.SysUser;
@@ -42,7 +43,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         // 设置账号状态，默认状态0表示正常，1表示停用
         sysUser.setStatus(StatusConstant.ENABLE);
         // 设置用户类型,默认普通用户
-        sysUser.setType(UserTypeConstant.USER);
+        sysUser.setType(UserTypeConstant.DEFAULT_USER);
         // 设置密码，默认密码
         sysUser.setPassword(passwordEncoder.encode(PasswordConstant.DEFAULT_PASSWORD));
         // 设置标志，默认未删除
@@ -51,9 +52,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         sysUser.setCreateTime(LocalDateTime.now());
         sysUser.setUpdateTime(LocalDateTime.now());
         // 设置当前创建用户的id修改的id
-//        TODO后期修改
-        sysUser.setCreateBy(1L);
-        sysUser.setUpdateBy(1L);
+        if (BaseContext.getCurrentId()!=null){
+            sysUser.setCreateBy(BaseContext.getCurrentId());
+            sysUser.setUpdateBy(BaseContext.getCurrentId());
+        }else {
+            sysUser.setCreateBy(-1L);
+            sysUser.setUpdateBy(-1L);
+        }
         sysUserMapper.insert(sysUser);
     }
 }

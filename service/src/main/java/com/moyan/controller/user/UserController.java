@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @create: 2025-09-30 22:08
  **/
 
-@RestController("/user")
 @Slf4j
 @Tag(name = "用户管理接口", description = "提供用户相关的REST API")
-
+@RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private SysUserService userService;

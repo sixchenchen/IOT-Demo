@@ -1,5 +1,6 @@
 package com.moyan.filter;
 
+import com.moyan.constant.TokenConstant;
 import com.moyan.context.BaseContext;
 import com.moyan.pojo.LoginUser;
 import com.moyan.utils.JwtUtil;
@@ -56,9 +57,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
         try {
             //1.在请求头中获取token
-            String token = request.getHeader("Authorization");
+            String token = request.getHeader(TokenConstant.TOKEN_HEADER);
             // 支持 Bearer token 格式
-            if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            if (StringUtils.hasText(token) && token.startsWith(TokenConstant.TOKEN_PREFIX)) {
                 token = token.substring(7);
             }
 
@@ -103,9 +104,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-            //5.将用户id存入BaseContext
+            //5.将用户id存入ThreadLocal
             BaseContext.setCurrentId(loginUser.getUser().getId());
-
             //6.放行
             filterChain.doFilter(request,response);
         } finally {
