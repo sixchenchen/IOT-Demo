@@ -31,6 +31,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .packagesToScan("com.moyan.controller.user")  // 确保包含用户控制器包
                 .build();
     }
+
     /**
      * 默认API分组（包含所有接口）
      */
@@ -41,6 +42,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
                 .packagesToScan("com.moyan.controller")  // 扫描所有控制器
                 .build();
     }
+
     /**
      * 全局OpenAPI配置
      */
@@ -81,16 +83,25 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     /**
      * 扩展消息转换器 - 使用自定义 Jackson 配置
+     * 该方法用于配置和扩展 Spring MVC 的消息转换器，特别是针对 JSON 数据的处理
+     * 通过自定义 Jackson 配置，可以实现更灵活的序列化和反序列化规则
      */
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        // 使用流式处理遍历消息转换器列表
         converters.stream()
+                // 筛选出类型为 MappingJackson2HttpMessageConverter 的转换器
                 .filter(converter -> converter instanceof MappingJackson2HttpMessageConverter)
+                // 获取第一个符合条件的转换器（如果存在）
                 .findFirst()
+                // 如果找到匹配的转换器，则执行自定义配置
                 .ifPresent(converter -> {
+                    // 将转换器强制类型转换为 MappingJackson2HttpMessageConverter
                     MappingJackson2HttpMessageConverter jacksonConverter =
                             (MappingJackson2HttpMessageConverter) converter;
+                    // 设置自定义的 ObjectMapper 配置
                     jacksonConverter.setObjectMapper(new JacksonObjectMapper());
+                    // 记录配置完成日志
                     log.info("自定义 Jackson 消息转换器配置完成");
                 });
     }

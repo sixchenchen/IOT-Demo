@@ -27,4 +27,36 @@
         email,phonenumber,sex,avatar,create_by,
         create_time,update_by,update_time,del_flag
     </sql>
+
+    <select id="pageQuery" resultType="com.moyan.pojo.SysUser">
+        select * from sys_user
+        <where>
+            <if test="name != null and name != ''">
+                and user_name like concat('%',#{name},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <update id="update">
+        update sys_user
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phonenumber != null">phonenumber = #{phonenumber},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </set>
+        where id = #{id}
+    </update>
+
 </mapper>

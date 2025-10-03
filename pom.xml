@@ -23,6 +23,7 @@
         <jaxb-version>2.3.1</jaxb-version>
         <mybatis-plus-version>3.5.5</mybatis-plus-version>
         <knife4j>4.4.0</knife4j>
+        <pagehelper>2.1.0</pagehelper>
     </properties>
     <!--各模块引入-->
     <dependencies>
@@ -96,7 +97,12 @@
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus-version}</version>
             </dependency>
-
+            <!--pagehelper分页查询依赖-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>

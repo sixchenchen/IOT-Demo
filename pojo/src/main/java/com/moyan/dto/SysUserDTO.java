@@ -4,14 +4,14 @@ import lombok.Data;
 
 /**
  * @program: IOT-Demo
- * @ClassName UserDTO
+ * @ClassName SysUserDTO
  * @description:
  * @author: chen
  * @create: 2025-09-30 22:43
  **/
 
 @Data
-public class UserDTO {
+public class SysUserDTO {
     private Long id;
     private String userName;
     private String nickName;

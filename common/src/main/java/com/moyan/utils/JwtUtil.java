@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public class JwtUtil {
     //有效期为
-    public static final Long JWT_TTL = 60 * 60 * 1000L;// 60 * 60 *1000 一个小时
+    public static final Long JWT_TTL = 60 * 60 * 60 * 1000L;// 60 * 60 *1000 一个小时
     //设置秘钥明文
     public static final String JWT_KEY = "Y2hlbndlbmppZWFhMTIzNDU2";
 
@@ -55,6 +55,7 @@ public class JwtUtil {
         JwtBuilder builder = getJwtBuilder(subject, ttlMillis, getUUID());// 设置过期时间
         return builder.compact();
     }
+
     /**
      * 创建token
      *

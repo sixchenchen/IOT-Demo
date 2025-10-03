@@ -6,7 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 用户表
@@ -14,6 +18,9 @@ import lombok.Data;
  */
 @TableName(value ="sys_user")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysUser {
     /**
      * 主键
