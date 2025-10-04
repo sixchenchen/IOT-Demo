@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moyan.mapper.ProductPropertiesMapper">
+
+    <resultMap id="BaseResultMap" type="com.moyan.pojo.ProductProperties">
+            <id property="propertyId" column="property_id" />
+            <result property="productId" column="product_id" />
+            <result property="propertyName" column="property_name" />
+            <result property="identifier" column="identifier" />
+            <result property="dataType" column="data_type" />
+            <result property="unit" column="unit" />
+            <result property="minValue" column="min_value" />
+            <result property="maxValue" column="max_value" />
+            <result property="stepSize" column="step_size" />
+            <result property="enumValues" column="enum_values" />
+            <result property="isReadonly" column="is_readonly" />
+            <result property="isRequired" column="is_required" />
+            <result property="description" column="description" />
+            <result property="sortOrder" column="sort_order" />
+            <result property="createdAt" column="created_at" />
+            <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        property_id,product_id,property_name,identifier,data_type,unit,
+        min_value,max_value,step_size,enum_values,is_readonly,
+        is_required,description,sort_order,created_at,updated_at
+    </sql>
+</mapper>

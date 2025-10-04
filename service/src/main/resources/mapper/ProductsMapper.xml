@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moyan.mapper.ProductsMapper">
+
+    <resultMap id="BaseResultMap" type="com.moyan.pojo.Products">
+            <id property="productId" column="product_id" />
+            <result property="productName" column="product_name" />
+            <result property="productKey" column="product_key" />
+            <result property="categoryId" column="category_id" />
+            <result property="description" column="description" />
+            <result property="manufacturer" column="manufacturer" />
+            <result property="model" column="model" />
+            <result property="protocolType" column="protocol_type" />
+            <result property="networkType" column="network_type" />
+            <result property="dataFormat" column="data_format" />
+            <result property="status" column="status" />
+            <result property="imageUrl" column="image_url" />
+            <result property="createTime" column="create_time" />
+            <result property="updateTime" column="update_time" />
+            <result property="createBy" column="create_by" />
+            <result property="updateBy" column="update_by" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        product_id,product_name,product_key,category_id,description,manufacturer,
+        model,protocol_type,network_type,data_format,status,
+        image_url,create_at,update_at,create_by,update_by
+    </sql>
+    <update id="update" parameterType="com.moyan.pojo.Products">
+        update products
+        <set>
+            <if test="productName != null and productName != '' ">
+                product_name = #{productName},
+            </if>
+            <if test="productKey != null and productKey != ''">
+                    product_key = #{productKey},
+            </if>
+            <if test="categoryId != null">
+                    category_id = #{categoryId},
+            </if>
+            <if test="description != null and description != ''">
+                    description = #{description},
+            </if>
+            <if test="manufacturer and manufacturer != ''">
+                manufacturer = #{manufacturer},
+            </if>
+            <if test="model != null and model != ''">
+                model = #{model},
+            </if>
+            <if test="protocolType != null and protocolType != ''">
+                    protocol_type = #{protocolType},
+            </if>
+            <if test="networkType != null and networkType != ''">
+                    network_type = #{networkType},
+            </if>
+            <if test="dataFormat != null and dataFormat != ''">
+                    data_format = #{dataFormat},
+            </if>
+            <if test="status != null ">
+                    status = #{status},
+            </if>
+            <if test="imageUrl != null and imageUrl != ''">
+                    image_url = #{imageUrl},
+            </if>
+            <if test="updateTime != null">
+                    update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                    update_by = #{updateBy},
+            </if>
+        </set>
+        where product_id = #{productId}
+    </update>
+
+    <select id="pageQuery" resultType="com.moyan.pojo.Products"
+            parameterType="com.moyan.dto.ProductsPageQueryDTO">
+        select * FROM products p
+        LEFT JOIN product_categories pc on p.category_id = pc.category_id
+        <where>
+            <if test="productName !=null and productName != '' ">
+                and p.product_name like concat('%',#{productName},'%')
+            </if>
+            <if test="categoryName !=null and categoryName != '' ">
+                and pc.category_name like concat('%',#{categoryName},'%')
+            </if>
+            <if test="status != null">
+                and p.status = #{status}
+            </if>
+            <if test="currentId != null">
+                and p.create_by = #{currentId}
+            </if>
+        </where>
+        order by p.create_at desc
+    </select>
+</mapper>

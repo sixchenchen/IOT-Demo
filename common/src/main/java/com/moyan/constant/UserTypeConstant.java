@@ -5,6 +5,5 @@ package com.moyan.constant;
  */
 public class UserTypeConstant {
     public static final String DEFAULT_USER = "0";
-
     public static final String ADMIN_USER = "1";
 }

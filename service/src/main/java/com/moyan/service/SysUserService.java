@@ -19,8 +19,11 @@ public interface SysUserService extends IService<SysUser> {
     PageResult pageQuery(UserPageQueryDTO userPageQueryDTO);
 
     // 启用禁用员工
-    void startOrStop(String status, Long id);
+    void startOrStop(Integer status, Long id);
 
     // 编辑员工信息
     void update(SysUserDTO sysUserDTO);
+
+    // 删除员工
+    void delete(Long id,Integer delFlag);
 }

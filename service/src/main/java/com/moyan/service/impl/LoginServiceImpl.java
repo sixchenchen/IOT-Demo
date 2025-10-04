@@ -1,6 +1,7 @@
 package com.moyan.service.impl;
 
 import com.moyan.constant.TokenConstant;
+import com.moyan.exception.AccountLockedException;
 import com.moyan.pojo.LoginUser;
 import com.moyan.pojo.dto.LoginUserDTO;
 import com.moyan.service.LoginServcie;
@@ -43,9 +44,10 @@ public class LoginServiceImpl implements LoginServcie {
         //3.在Authentication中获取用户信息
         LoginUser loginUser = (LoginUser) authenticated.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
+
         //4.认证通过生成token
         String jwt = JwtUtil.createJWT(userId);
-        //5.用户信息存入redis
+        //6.用户信息存入redis
         redisCache.setCacheObject(TokenConstant.TOKEN_INFO + userId, loginUser);
         //6.把token返回给前端
         HashMap<String, Object> hashMap = new HashMap<>();

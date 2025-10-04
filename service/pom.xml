@@ -32,6 +32,11 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
         </dependency>
+        <!--切面依赖-->
+        <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!--项目模块依赖-->
         <dependency>
             <groupId>com.moyan</groupId>

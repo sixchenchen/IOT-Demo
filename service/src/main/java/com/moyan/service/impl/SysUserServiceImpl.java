@@ -53,17 +53,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
         sysUser.setPassword(passwordEncoder.encode(PasswordConstant.DEFAULT_PASSWORD));
         // 设置标志，默认未删除
         sysUser.setDelFlag(StatusConstant.NOT_DELETE);
-        // 设置当前记录创建用户事件
-        sysUser.setCreateTime(LocalDateTime.now());
-        sysUser.setUpdateTime(LocalDateTime.now());
-        // 设置当前创建用户的id修改的id
-        if (BaseContext.getCurrentId() != null) {
-            sysUser.setCreateBy(BaseContext.getCurrentId());
-            sysUser.setUpdateBy(BaseContext.getCurrentId());
-        } else {
-            sysUser.setCreateBy(-1L);
-            sysUser.setUpdateBy(-1L);
-        }
         sysUserMapper.insert(sysUser);
     }
 
@@ -92,7 +81,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
      * @param id
      */
     @Override
-    public void startOrStop(String status, Long id) {
+    public void startOrStop(Integer status, Long id) {
         SysUser user = SysUser.builder()
                 .status(status)
                 .id(id).build();
@@ -101,16 +90,27 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser>
 
     /**
      * 编辑员工信息
+     *
      * @param sysUserDTO
      */
     @Override
     public void update(SysUserDTO sysUserDTO) {
         SysUser sysUser = new SysUser();
         BeanUtils.copyProperties(sysUserDTO, sysUser);
+        sysUserMapper.update(sysUser);
+    }
 
-        sysUser.setUpdateBy(BaseContext.getCurrentId());
-        sysUser.setUpdateTime(LocalDateTime.now());
-
+    /**
+     * 删除员工
+     *
+     * @param id
+     */
+    @Override
+    public void delete(Long id, Integer delFlag) {
+        // 修改员工删除标记
+        SysUser sysUser = new SysUser();
+        sysUser.setId(id);
+        sysUser.setDelFlag(delFlag);
         sysUserMapper.update(sysUser);
     }
 }

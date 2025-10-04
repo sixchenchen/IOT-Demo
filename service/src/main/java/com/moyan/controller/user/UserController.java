@@ -63,7 +63,7 @@ public class UserController {
      */
     @PostMapping("/status/{status}")
     @Operation(summary = "启用或禁用用户")
-    public ResponseResult startOrStop(@PathVariable String status,Long id){
+    public ResponseResult startOrStop(@PathVariable Integer status,Long id){
         log.info("启用禁用用户：{}，{}",status,id);
         userService.startOrStop(status,id);
         return ResponseResult.success();
@@ -88,6 +88,19 @@ public class UserController {
     public ResponseResult update(@RequestBody SysUserDTO sysUserDTO){
         log.info("更新用户：{}",sysUserDTO);
         userService.update(sysUserDTO);
+        return ResponseResult.success();
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    @Operation(summary = "删除用户")
+    public ResponseResult delete(@PathVariable Long id,Integer delFlag){
+        log.info("删除用户：{}",id);
+        userService.delete(id,delFlag);
         return ResponseResult.success();
     }
 }

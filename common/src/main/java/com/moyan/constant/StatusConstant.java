@@ -6,11 +6,11 @@ package com.moyan.constant;
 public class StatusConstant {
 
     //启用
-    public static final String ENABLE = "0";
+    public static final Integer ENABLE = 0;
 
     //禁用
-    public static final String DISABLE = "1";
+    public static final Integer DISABLE = 1;
 
-
+    //未删除
     public static final Integer NOT_DELETE = 0;
 }
