@@ -33,6 +33,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private SysUserMapper userMapper;
     @Autowired
     MenuMapper menuMapper;
+
+    /**
+     * 根据用户名(账号)查询用户信息
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 根据用户名查询用户信息

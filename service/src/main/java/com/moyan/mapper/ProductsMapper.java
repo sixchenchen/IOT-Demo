@@ -16,13 +16,15 @@ import org.apache.ibatis.annotations.Insert;
 */
 public interface ProductsMapper extends BaseMapper<Products> {
 
+    // 分页查询产品
     Page<Products> pageQuery(ProductsPageQueryDTO productsPageQueryDTO);
 
+    // 新增产品
     @AutoFill(OperationType.INSERT)
     @Insert("insert into products(product_name,products.product_key,category_id,description,manufacturer,model,image_url,create_time,update_time,create_by,update_by) values(#{productName},#{productKey},#{categoryId},#{description},#{manufacturer},#{model},#{imageUrl},#{createTime},#{updateTime},#{createBy},#{updateBy})")
     int insert(Products products);
 
-
+    // 修改产品
     @AutoFill(OperationType.UPDATE)
     void update(Products products);
 

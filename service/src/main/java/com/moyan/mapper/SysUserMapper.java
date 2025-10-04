@@ -19,7 +19,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
     //插入用户
-
     @Insert("insert into sys_user(user_name,nick_name,password,type,status,email,phonenumber,sex,avatar,create_by,create_time,update_by,update_time,del_flag) "
             + "values" +
             "(#{userName},#{nickName},#{password},#{type},#{status},#{email},#{phonenumber},#{sex},#{avatar},#{createBy},#{createTime},#{updateBy},#{updateTime},#{delFlag})")

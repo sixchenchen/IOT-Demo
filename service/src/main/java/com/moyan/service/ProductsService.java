@@ -21,6 +21,6 @@ public interface ProductsService extends IService<Products> {
     void startOrStop(Integer status, Long productId);
     // 修改产品
     void update(ProductDTO productDTO);
-
+    // 删除产品
     void delete(Long productId);
 }

@@ -32,6 +32,7 @@ public interface ProductCategoriesMapper extends BaseMapper<ProductCategories> {
     @AutoFill(OperationType.UPDATE)
     void update(ProductCategories productCategories);
 
+    // 分页查询产品分类
     Page<ProductCategories> pageQuery(ProductCategoryPageDTO productCategoryPageDTO);
 }
 

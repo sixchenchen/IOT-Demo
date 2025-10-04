@@ -46,6 +46,10 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         return new PageResult(total, result);
     }
 
+    /**
+     * 插入产品
+     * @param productDTO
+     */
     @Override
     public void save(ProductDTO productDTO) {
         Products products = new Products();
@@ -70,6 +74,11 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         productsMapper.update(products);
     }
 
+    /**
+     * 修改产品信息
+     *
+     * @param productDTO
+     */
     @Override
     public void update(ProductDTO productDTO) {
         Products products = new Products();
@@ -77,6 +86,11 @@ public class ProductsServiceImpl extends ServiceImpl<ProductsMapper, Products>
         productsMapper.update(products);
     }
 
+    /**
+     * 删除产品
+     *
+     * @param productId
+     */
     @Override
     public void delete(Long productId) {
         productsMapper.deleteById(productId);

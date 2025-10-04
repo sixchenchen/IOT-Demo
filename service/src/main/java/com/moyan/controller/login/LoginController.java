@@ -1,9 +1,8 @@
 package com.moyan.controller.login;
 
-import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.moyan.pojo.dto.LoginUserDTO;
-import com.moyan.service.LoginServcie;
 import com.moyan.result.ResponseResult;
+import com.moyan.service.LoginService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,18 +23,18 @@ import java.util.HashMap;
 @Tag(name = "登录管理", description = "提供用户相关的REST API")
 public class LoginController {
     @Autowired
-    private LoginServcie loginServcie;
+    private LoginService loginService;
 
     @PostMapping("/login")
     public ResponseResult login(@RequestBody LoginUserDTO loginUserDTO) {
-        HashMap<String, Object> token = loginServcie.login(loginUserDTO);
+        HashMap<String, Object> token = loginService.login(loginUserDTO);
         return ResponseResult.success("登录成功",token);
     }
 
     @PostMapping("/logout")
     public ResponseResult logout() {
         System.out.println("开始登出");
-        loginServcie.logout();
+        loginService.logout();
         return ResponseResult.success("退出成功");
     }
 }

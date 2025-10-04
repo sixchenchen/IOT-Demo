@@ -12,8 +12,11 @@ import java.util.HashMap;
  * @create: 2025-09-14 11:49
  **/
 
-public interface LoginServcie {
+public interface LoginService {
+
+    // 登录
     HashMap<String, Object> login(LoginUserDTO loginUserDTO);
 
+    // 退出
     void logout();
 }

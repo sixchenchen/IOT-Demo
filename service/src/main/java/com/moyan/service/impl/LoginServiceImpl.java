@@ -1,10 +1,9 @@
 package com.moyan.service.impl;
 
 import com.moyan.constant.TokenConstant;
-import com.moyan.exception.AccountLockedException;
 import com.moyan.pojo.LoginUser;
 import com.moyan.pojo.dto.LoginUserDTO;
-import com.moyan.service.LoginServcie;
+import com.moyan.service.LoginService;
 import com.moyan.utils.JwtUtil;
 import com.moyan.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,17 @@ import java.util.HashMap;
  **/
 
 @Service
-public class LoginServiceImpl implements LoginServcie {
+public class LoginServiceImpl implements LoginService {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
     RedisCache redisCache;
 
+    /**
+     * 登录方法,通过UserDetailsServiceImpl中的loadUserByUsername方法获取用户信息
+     * @param loginUserDTO
+     * @return
+     */
     @Override
     public HashMap<String, Object> login(LoginUserDTO loginUserDTO) {
 
@@ -55,6 +59,9 @@ public class LoginServiceImpl implements LoginServcie {
         return hashMap;
     }
 
+    /**
+     * 退出登录
+     */
     @Override
     public void logout() {
         //获取SecurityContextHolder中的用户id
