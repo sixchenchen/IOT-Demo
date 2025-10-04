@@ -30,6 +30,11 @@ public class ProductsController {
     @Autowired
     private ProductsService productService;
 
+    /**
+     * 产品种类分页查询
+     * @param productsPageQueryDTO
+     * @return
+     */
     @GetMapping("/page")
     @Operation(summary = "产品种类分页查询")
     public ResponseResult<PageResult> page(ProductsPageQueryDTO productsPageQueryDTO) {
@@ -80,6 +85,11 @@ public class ProductsController {
         return ResponseResult.success(products);
     }
 
+    /**
+     * 修改产品信息
+     * @param productDTO
+     * @return
+     */
     @PutMapping
     @Operation(summary = "修改产品信息")
     public ResponseResult update(@RequestBody ProductDTO productDTO) {
@@ -88,6 +98,11 @@ public class ProductsController {
         return ResponseResult.success();
     }
 
+    /**
+     * 删除产品
+     * @param productId
+     * @return
+     */
     @DeleteMapping("/{productId}")
     @Operation(summary = "删除产品")
     public ResponseResult delete(@PathVariable Long productId){

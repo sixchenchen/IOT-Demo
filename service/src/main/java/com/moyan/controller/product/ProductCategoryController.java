@@ -69,17 +69,26 @@ public class ProductCategoryController {
     }
 
 
-
+    /**
+     * 根据id查询产品分类
+     * @param categoryId
+     * @return
+     */
     @GetMapping("/{categoryId}")
-    @Operation(summary = "查询产品分类")
+    @Operation(summary = "根据id查询产品分类")
     public ResponseResult<ProductCategories> getById(@PathVariable Long categoryId){
         log.info("查询产品分类：{}",categoryId);
         ProductCategories productCategories = productCategoryService.getById(categoryId);
         return ResponseResult.success(productCategories);
     }
 
+    /**
+     * 分页查询产品分类
+     * @param productCategoryPageDTO
+     * @return
+     */
     @GetMapping
-    @Operation(summary = "查询产品分类列表")
+    @Operation(summary = "分页查询产品分类")
     public ResponseResult<PageResult> page(ProductCategoryPageDTO productCategoryPageDTO){
         log.info("查询产品分类列表：{}",productCategoryPageDTO);
         PageResult pageResult = productCategoryService.page(productCategoryPageDTO);
